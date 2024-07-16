@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';  
 
 const VideoContext = createContext();
 
@@ -10,7 +10,7 @@ export const VideoProvider = ({ children }) => {
 
     const fetchVideos = async () => {
         try {
-            const response = await fetch('http://localhost:3001/videos');
+            const response = await fetch("https://my-json-server.typicode.com/Fabianhernandez23/Aluraflix-api/videos/");
             const data = await response.json();
             setVideos(data);
         } catch (error) {
@@ -21,6 +21,14 @@ export const VideoProvider = ({ children }) => {
     useEffect(() => {
         fetchVideos();
     }, []);
+
+   /* useEffect(() => {
+        fetch()
+        .then (response => response.json())
+        .then (data=> {
+        setVideos(data);
+})
+}, []);*/
 
     const addVideo = (video) => {
         setVideos((prevVideos) => [...prevVideos, { ...video, id: prevVideos.length + 1 }]);
